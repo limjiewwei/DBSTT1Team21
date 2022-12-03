@@ -2,15 +2,16 @@ import React from "react";
 import { render } from "react-dom";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import App from "./App";
-import Login from "./pages/Login";
-import Dashboard from "./components/TransactionTable";
+import Profilepage from "./pages/Profilepage";
+// import Login from "./pages/Login";
+// import Dashboard from "./components/TransactionTable";
 
 render(
 	<Router>
 		<Routes>
 			<Route path="/" element={<App />}>
 				{/* Public Routes */}
-				<Route path="login" element={<Login />} />
+				{/* <Route path="login" element={<Login />} /> */}
 				<Route
 					path="*"
 					element={
@@ -19,6 +20,8 @@ render(
 						</main>
 					}
 				/>
+        {/* <Route path="login" element={<Login />} /> */}
+        <Route path="profilepage" element={<Profilepage />} />
 			</Route>
 		</Routes>
 	</Router>,
