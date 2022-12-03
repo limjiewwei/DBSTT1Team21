@@ -2,11 +2,17 @@ import { useState } from "react";
 import Table from "react-bootstrap/Table";
 import Container from "react-bootstrap/Container";
 import UserProfile from "./UserProfile";
+import Button from "react-bootstrap/Button";
+import { useNavigate } from "react-router-dom";
 
 function DashboardOveriew() {
 	const [transactions, setTransactions] = useState([]);
 	const [account, setAccountType] = useState("");
 	const headers = ["AccountID", "ReceivingAccountID", "Date", "Amount", "Comment"];
+	const navigate = useNavigate();
+	const scheduleTransaction = () => {
+		navigate("/newtransaction");
+	};
 	return (
 		<Container fluid className="mt-5">
 			<UserProfile />
@@ -43,6 +49,7 @@ function DashboardOveriew() {
 					</tr>
 				</tbody>
 			</Table>
+			<Button onClick={scheduleTransaction}>Schedule new transaction</Button>
 		</Container>
 	);
 }
