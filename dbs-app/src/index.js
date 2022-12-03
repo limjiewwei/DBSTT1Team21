@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import App from "./App";
 import Login from "./pages/Login";
 import Dashboard from "./components/DashboardOverview";
+import Profilepage from "./pages/Profilepage";
 
 render(
 	<Router>
@@ -19,6 +20,8 @@ render(
 						</main>
 					}
 				/>
+        {/* <Route path="login" element={<Login />} /> */}
+        <Route path="profilepage" element={<Profilepage />} />
 			</Route>
 		</Routes>
 	</Router>,
