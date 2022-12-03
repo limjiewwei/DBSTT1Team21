@@ -63,7 +63,7 @@ function Login() {
         <main className=" form-signin container-fluid">
           <div className="card card-body mx-auto" style={boxshadow} >
         <form >
-          <div className="container-fluid mx-auto" style={{justifyContent:'center'}}>
+          <div className="container-fluid mx-auto" style={{'align-items':"center", justifyContent:'center'}}>
         <img src="desktoplogo.png" className="img-responsive center-block mx-auto"/>
         </div>
         <br/>
