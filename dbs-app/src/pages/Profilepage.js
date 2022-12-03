@@ -1,46 +1,61 @@
 import '../App.css';
-import { useState, useContext } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { useNavigate } from'react-router-dom'
 import axios from 'axios'
 
 const Profilepage = () => {
     const navigate = useNavigate()
-    const [username, setUsername] = useState("")
-    const [firstName, setFirstName] = useState("")
-    const [lastName, setLastName] = useState("")
+    const [userObject, setUserObject] = useState({})
     const [address, setAddress] = useState("")
     const [email, setEmail] = useState("")
-    const [optIn, setOptIn] = useState("")
+    const [checkBox, setCheckBox] = useState("")
+
+    useEffect(() => {
+      // axios.get(`http://localhost:3001/accounts/${id}`).then((response) => {
+      //   setUserObject(response.data)
+      // })
+      if (userObject.OptIntoPhyStatements == 1) {
+        setCheckBox("checked")
+      }
+    }, [])
+
+    const cancel = () => {
+      navigate("/")
+    }
+
+    const edit = () => {
+      
+    }
 
   return (
     <form class="profileContainer">
     <h3>Profile Page</h3>
     <div class="form-group">
-      <label for="exampleInputEmail1">Username</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
+      <label>Username</label>
+      <input disabled type="text" class="form-control" />
     </div>
     <div class="form-group">
-      <label for="exampleInputPassword1">First Name</label>
-      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" />
+      <label>First Name</label>
+      <input disabled type="text" class="form-control" />
     </div>
     <div class="form-group">
-      <label for="exampleInputPassword1">Last Name</label>
-      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" />
+      <label>Last Name</label>
+      <input disabled type="text" class="form-control" />
     </div>
     <div class="form-group">
-      <label for="exampleInputPassword1">Address</label>
-      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" />
+      <label for="address">Address</label>
+      <input type="passtextword" class="form-control" id="address" />
     </div>
     <div class="form-group">
-      <label for="exampleInputPassword1">Email</label>
-      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" />
+      <label for="email">Email</label>
+      <input type="text" class="form-control" id="email" />
     </div>
     <div class="form-check">
-      <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-      <label class="form-check-label" for="exampleCheck1">Opt in ..</label>
+      <input disabled type="checkbox" class="form-check-input" id="checkBox" checked={checkBox} />
+      <label class="form-check-label">Opt in Physical Statements</label>
     </div>
-    <button type="submit" class="btn btn-primary">Save</button>
-    <button type="submit" class="btn btn-primary">Cancel</button>
+    <button onClick={edit} type="submit" class="btn btn-primary">Save</button>
+    <button onClick={cancel} type="submit" class="btn btn-primary">Cancel</button>
 
     </form>
   )
