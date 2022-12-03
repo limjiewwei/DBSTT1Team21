@@ -60,7 +60,7 @@ export default function NewTransaction(props) {
 
 	return (
 		<div class="p-5">
-            <p onClick = {backButton}> Back </p>
+            <Button variant="outline-secondary" onClick={backButton}>Back</Button>
 			<h1>New Transaction</h1>
 			<Form>
 				<Form.Group className="mb-3">
