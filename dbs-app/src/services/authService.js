@@ -1,8 +1,6 @@
-import http from "../http-common";
+import axios from "axios";
 
-class authService{
-    register(payload){
-        return http.post("/auth/signup")
-    }
-}
-export default new authService();
+export const setAuthToken = (token) => {
+	if (token) axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+	else delete axios.defaults.headers.common["Authorization"];
+};
