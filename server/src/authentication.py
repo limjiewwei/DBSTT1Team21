@@ -40,7 +40,7 @@ def register_user():
     elif not password:
         return jsonify({
             "errors": "Please enter password"
-        }), HTTP_409_CONFLICTs
+        }), HTTP_409_CONFLICT
 
     if user_exists:
         return jsonify({"conflict": "This account already exists"}), HTTP_409_CONFLICT
@@ -60,12 +60,12 @@ def register_user():
 @authentication.route("/login", methods=["POST"])
 def login_user():
     
-    email = request.json["email"]
+    username = request.json["username"]
     password = request.json["password"]
 
-    if not email:
+    if not username:
         return jsonify({
-            "errors": "that email is not registered"
+            "errors": "that username is not registered"
             }), HTTP_401_UNAUTHORIZED
     elif not password:
         return jsonify({
@@ -73,7 +73,7 @@ def login_user():
         }), HTTP_401_UNAUTHORIZED
 
 
-    user = User.query.filter_by(email=email).first()
+    user = User.query.filter_by(Username=username).first()
 
     if user is None:
         return jsonify({
