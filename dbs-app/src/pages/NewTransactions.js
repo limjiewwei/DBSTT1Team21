@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from "react";
 import MainMenu from "../components/MainMenu";
 import Dropdown from "react-bootstrap/Dropdown";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 export default function NewTransaction(props) {
   const [transactions, setTransactions] = useState([]);
-  const [sender, setSender] = useState([]);
+  const [allSenders, setAllSenders] = useState([]);
+  const [senderId, setSenderId] = useState("");
+  const [senderType, setSenderType] = useState("");
+  const [accBal, setAccBal] = useState(0);
   const [recipient, setRecipient] = useState("");
   const [amount, setAmount] = useState("");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [comment, setComment] = useState("");
+  const userID = 1;
 
   const submitTransaction = () => {
     return;
@@ -17,88 +23,102 @@ export default function NewTransaction(props) {
 
   const getSenderAccounts = () => {
     // fetch
-    // setSender
-    return;
+    fetch('http://localhost:5000/getaccounts',{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            userID: userID
+        }),
+    }).then((res) => res.json())
+    .then((data) =>{
+        console.log(data)
+        setAllSenders(data)
+    })
   };
+
+  const clickedSender = (sender) => {
+    setSenderId(sender.AccountID);
+    setSenderType(sender.AccountType);
+    setAccBal(sender.AccountBalance);
+
+    console.log(senderId);
+    console.log(senderType);
+    console.log(accBal);
+  }
+
+  useEffect(() => {
+    getSenderAccounts();
+  },[])
 
   return (
     <div class="p-5">
       <h1>New Transaction</h1>
-      <form>
-        <div class="form-group">
-          {/* sender */}
-          <label for="sender">From</label>
-          <Dropdown>
+      <Form>
+      <Form.Group className="mb-3">
+        <Form.Label>Sender</Form.Label>
+        <Dropdown>
             <Dropdown.Toggle variant="success" id="dropdown-basic">
               Dropdown Button
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-              <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-              <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-              <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                {allSenders.map((send) => {
+                    return <Dropdown.Item onClick = {(e) => clickedSender(send)}>{send.AccountID} ({send.AccountType})</Dropdown.Item>
+                })}
             </Dropdown.Menu>
           </Dropdown>
-        </div>
-        {/* recipient */}
-        <div class="form-group">
-          <label for="recipient">To</label>
-          <input
-            type="text"
-            class="form-control"
-            id="exampleInputPassword1"
-            placeholder="Account ID of recipient"
-            onChange={() => setRecipient}
-          />
-        </div>
-        {/* amount */}
-        <div class="form-group">
-          <label for="amount">Amount</label>
-          <input
-            type="number"
-            class="form-control"
-            id="exampleInputPassword1"
-            placeholder="Amount to send"
-            onChange={() => setAmount}
-          />
-        </div>
-        {/* date */}
-        <div class="form-group">
-          <label for="recipient">Date</label>
-          <input
-            type="text"
-            class="form-control"
-            id="exampleInputPassword1"
-            placeholder="YYYY-MM-DD"
-          />
-        </div>
-        {/* time */}
-        <div class="form-group">
-          <label for="Time">Time</label>
-          <input
-            type="text"
-            class="form-control"
-            id="exampleInputPassword1"
-            placeholder="HH:MM (24h format)"
-          />
-        </div>
-        {/* comments */}
-        <div class="form-group">
-          <label for="comments">Comments</label>
-          <textarea
-            class="form-control"
-            id="exampleFormControlTextarea1"
-            rows="3"
-          ></textarea>
-        </div>
-        <button
-          type="submit"
-          class="btn btn-primary"
-          onClick={() => submitTransaction}
-        >
-          Submit
-        </button>
-      </form>
+            {senderId != "" ? 
+            <Form.Text className="text-muted">
+                {senderId} ({senderType}) selected
+            </Form.Text>
+            : null}
+          
+      </Form.Group>
+
+      <Form.Group className="mb-3">
+        <Form.Label>Recipient</Form.Label>
+        <Form.Control type="text" placeholder="Enter recipient account ID" onClick = {(e) => setRecipient(e.target.value)}/>
+      </Form.Group>
+
+      <Form.Group className="mb-3">
+        <Form.Label>Amount</Form.Label>
+        <Form.Control type="number" placeholder="Enter amount to be sent" onClick = {(e) => setAmount(e.target.value)}/>
+        {amount > accBal ? (
+            <Form.Text className="text-muted">
+              The amount is larger than your balance. This transaction will be rejected at the scheduled date unless the balance is increased.
+            </Form.Text>
+          ) : null}
+      </Form.Group>
+
+      <Form.Group className="mb-3">
+        <Form.Label>Date</Form.Label>
+        <Form.Control type="text" placeholder="YYYY-MM-DD" onClick = {(e) => setDate(e.target.value)} />
+      </Form.Group>
+
+      <Form.Group className="mb-3">
+        <Form.Label>Time</Form.Label>
+        <Form.Control type="text" placeholder="HH:MM (24h format)" onClick = {(e) => setTime(e.target.value)}/>
+      </Form.Group>
+
+      <Form.Group className="mb-3">
+        <Form.Label>Comment</Form.Label>
+        <Form.Control as="textarea" rows={3} onChange = {(e) => setComment(e.target.value)}/>
+      </Form.Group>
+
+      <Button variant="primary" type="submit">
+        Cancel
+      </Button>
+
+      <Button variant="primary" type="submit" onClick = {() => submitTransaction}>
+        Submit
+      </Button>
+    </Form>
+
+
+
+      
     </div>
   );
 }
