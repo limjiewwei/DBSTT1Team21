@@ -23,6 +23,7 @@ function Login() {
 				[name]: value,
 			};
 		});
+		console.log(event.target.value);
 	}
 	const login = async (e) => {
 		e.preventDefault();
@@ -39,6 +40,7 @@ function Login() {
 						const token = response.data.accessToken;
 						localStorage.setItem("token", token);
 						setAuthToken(token);
+						navigate("/dashboard");
 					}
 				});
 		} catch (error) {
@@ -46,7 +48,7 @@ function Login() {
 				setMsg(error.response.data.msg);
 			}
 		} finally {
-			navigate("/");
+			navigate("/dashboard");
 		}
 	};
 	return (
@@ -64,20 +66,20 @@ function Login() {
 					<img src={desktoplogo} style={{ width: "200px", height: "150px", marginLeft: "auto", marginRight: "auto" }} />
 					<Card.Body>
 						<Form>
-							<Form.Group className="mb-3" controlId="formBasicEmail">
-								<Form.Label>Email address</Form.Label>
-								<Form.Control type="email" placeholder="Enter email" />
+							<Form.Group className="mb-3" controlId="formBasicUsername">
+								<Form.Label>Username</Form.Label>
+								<Form.Control onChange={handleChange} type="email" name="username" placeholder="Enter username" />
 								<Form.Text className="text-muted">We'll never share your email with anyone else.</Form.Text>
 							</Form.Group>
 
 							<Form.Group className="mb-3" controlId="formBasicPassword">
 								<Form.Label>Password</Form.Label>
-								<Form.Control type="password" placeholder="Password" />
+								<Form.Control onChange={handleChange} type="password" name="password" placeholder="Password" />
 							</Form.Group>
 							<Form.Group className="mb-3" controlId="formBasicCheckbox">
 								<Form.Check type="checkbox" label="Check me out" />
 							</Form.Group>
-							<Button variant="primary" type="submit">
+							<Button variant="primary" onClick={login} type="submit">
 								Submit
 							</Button>
 						</Form>
