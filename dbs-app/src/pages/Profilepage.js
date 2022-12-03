@@ -2,6 +2,7 @@ import '../App.css';
 import { useEffect, useState, useContext } from 'react'
 import { useNavigate } from'react-router-dom'
 import axios from 'axios'
+import Button from 'react-bootstrap/Button';
 
 const Profilepage = () => {
     const navigate = useNavigate()
@@ -9,6 +10,9 @@ const Profilepage = () => {
     const [address, setAddress] = useState("")
     const [email, setEmail] = useState("")
     const [checkBox, setCheckBox] = useState("")
+    const backButton = () => {
+      navigate(-1);
+    };
 
     useEffect(() => {
       // axios.get(`http://localhost:3001/users/${id}`).then((response) => {
@@ -34,6 +38,8 @@ const Profilepage = () => {
     }
 
   return (
+    <div>
+      <Button variant="outline-secondary" onClick={backButton}>Back</Button>
     <form class="profileContainer">
     <h3>Profile Page</h3>
     <div class="form-group">
@@ -64,6 +70,7 @@ const Profilepage = () => {
     <button onClick={cancel} type="submit" class="btn btn-primary">Cancel</button>
 
     </form>
+    </div>
   )
 }
 
