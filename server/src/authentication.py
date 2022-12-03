@@ -17,12 +17,12 @@ bcrypt = Bcrypt()
 @authentication.route("/register", methods=['POST'])
 def register_user():
 
-    email = request.json["email"]
+    username = request.json["username"]
     password = request.json["password"]
 
-    user_exists = User.query.filter_by(email=email).first() is not None
+    user_exists = User.query.filter_by(username=username).first() is not None
 
-    if not email:
+    if not username:
         return jsonify({
             "errors": "Please enter email address"
             }), HTTP_409_CONFLICT
@@ -36,7 +36,7 @@ def register_user():
     
     hashed_password = bcrypt.generate_password_hash(password)
 
-    new_user = User(email=email, password=hashed_password)
+    new_user = User(username=username, password=hashed_password)
     db.session.add(new_user)
     db.session.commit()
 
@@ -50,10 +50,10 @@ def register_user():
 @authentication.route("/login", methods=["POST"])
 def login_user():
     
-    email = request.json["email"]
+    username = request.json["username"]
     password = request.json["password"]
 
-    if not email:
+    if not username:
         return jsonify({
             "errors": "that email is not registered"
             }), HTTP_401_UNAUTHORIZED
@@ -63,7 +63,7 @@ def login_user():
         }), HTTP_401_UNAUTHORIZED
 
 
-    user = User.query.filter_by(email=email).first()
+    user = User.query.filter_by(username=username).first()
 
     if user is None:
         return jsonify({
@@ -83,6 +83,6 @@ def login_user():
     return jsonify({
         "user": user.id,
         "user id": user.user_id,
-        "email": user.email,
+        "usesrname": user.username,
         "token": token.decode('UTF-8')
     }), HTTP_200_OK
