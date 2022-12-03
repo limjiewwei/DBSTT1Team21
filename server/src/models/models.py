@@ -1,15 +1,4 @@
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import MetaData
-import datetime, string, random
-from flask import jsonify
-from uuid import uuid4
-
-db = SQLAlchemy()
-
-
-def get_uuid():
-    return uuid4().hex
-
+from db import db
 
 # database schema models
 
