@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import App from "./App";
 import Login from "./pages/Login";
 import Dashboard from "./components/DashboardOverview";
+import NewTransactions from "./pages/NewTransactions";
 import Profilepage from "./pages/Profilepage";
 
 render(
@@ -20,11 +21,9 @@ render(
 						</main>
 					}
 				/>
-        {/* <Route path="login" element={<Login />} /> */}
-        <Route path="profilepage" element={<Profilepage />} />
+				<Route path="profilepage" element={<Profilepage />} />
+				<Route path="newtransaction" element={<NewTransactions />} />
 			</Route>
-
-			<Route path="/newtransaction" element={<NewTransaction/>}/>
 		</Routes>
 	</Router>,
 	document.getElementById("root")
