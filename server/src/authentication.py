@@ -33,7 +33,7 @@ def register_user():
     address = request.json["Address"]
     opt = request.json["OptIntoPhyStatements"]
 
-    user_exists = User.query.filter_by(UserID=user_id).first() is not None
+    user_exists = User.query.filter_by(Username=username).first() is not None
 
     if not email:
         return jsonify({
@@ -54,6 +54,7 @@ def register_user():
     db.session.commit()
 
     return jsonify({
+        "message": "creation success",
         "user id": new_user.UserID,
         "email": new_user.Email
     }), HTTP_201_CREATED
@@ -67,11 +68,11 @@ def login_user():
 
     if not username:
         return jsonify({
-            "errors": "that username is not registered"
+            "errors": "no username provided"
             }), HTTP_401_UNAUTHORIZED
     elif not password:
         return jsonify({
-            "errors": "that password is incorrect"
+            "errors": "no password provided"
         }), HTTP_401_UNAUTHORIZED
 
 
