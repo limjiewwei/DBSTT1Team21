@@ -9,7 +9,9 @@ import jwt, os
 from datetime import datetime, timedelta
 from functools import wraps
 from flask_cors import CORS, cross_origin
+from flask_sqlalchemy import SQLAlchemy
 
+db = SQLAlchemy()
 
 authentication = Blueprint("authentication", __name__, url_prefix="/api1/auth")
 bcrypt = Bcrypt()
