@@ -14,13 +14,24 @@ from flask_cors import CORS, cross_origin
 authentication = Blueprint("authentication", __name__, url_prefix="/api1/auth")
 bcrypt = Bcrypt()
 
+@authentication.route("/", methods=['GET'])
+def test():
+    print("in")
+    return jsonify({"return": "OK"}), HTTP_200_OK
+
 @authentication.route("/register", methods=['POST'])
 def register_user():
 
     email = request.json["email"]
     password = request.json["password"]
+    user_id = request.json["UserID"]
+    username = request.json["Username"]
+    first_name = request.json["Firstname"]
+    last_name = request.json["Lastname"]
+    address = request.json["Address"]
+    opt = request.json["OptIntoPhyStatements"]
 
-    user_exists = User.query.filter_by(email=email).first() is not None
+    user_exists = User.query.filter_by(UserID=user_id).first() is not None
 
     if not email:
         return jsonify({
@@ -34,16 +45,15 @@ def register_user():
     if user_exists:
         return jsonify({"conflict": "This account already exists"}), HTTP_409_CONFLICT
     
-    hashed_password = bcrypt.generate_password_hash(password)
+    # hashed_password = bcrypt.generate_password_hash(password)
 
-    new_user = User(email=email, password=hashed_password)
+    new_user = User(Email=email, Password=password, UserID=user_id, Username=username, Firstname=first_name, Lastname=last_name, Address=address, OptIntoPhyStatements=opt)
     db.session.add(new_user)
     db.session.commit()
 
     return jsonify({
-        "user": new_user.id,
-        "user id": new_user.user_id,
-        "email": new_user.email
+        "user id": new_user.UserID,
+        "email": new_user.Email
     }), HTTP_201_CREATED
 
 
