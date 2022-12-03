@@ -9,6 +9,9 @@ const Profilepage = () => {
     const [address, setAddress] = useState("")
     const [email, setEmail] = useState("")
     const [checkBox, setCheckBox] = useState("")
+    const backButton = () => {
+      navigate(-1);
+    };
 
     useEffect(() => {
       // axios.get(`http://localhost:3001/accounts/${id}`).then((response) => {
@@ -28,6 +31,7 @@ const Profilepage = () => {
     }
 
   return (
+    <p onClick={backButton}>Back</p>
     <form class="profileContainer">
     <h3>Profile Page</h3>
     <div class="form-group">

@@ -3,6 +3,7 @@ import MainMenu from "../components/MainMenu";
 import Dropdown from "react-bootstrap/Dropdown";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { useNavigate } from "react-router-dom";
 
 export default function NewTransaction(props) {
 	const [transactions, setTransactions] = useState([]);
@@ -16,6 +17,10 @@ export default function NewTransaction(props) {
 	const [time, setTime] = useState("");
 	const [comment, setComment] = useState("");
 	const userID = 1;
+    const navigate = useNavigate();
+	const backButton = () => {
+		navigate(-1);
+	};
 
 	const submitTransaction = () => {
 		return;
@@ -55,6 +60,7 @@ export default function NewTransaction(props) {
 
 	return (
 		<div class="p-5">
+            <p onClick = {backButton}> Back </p>
 			<h1>New Transaction</h1>
 			<Form>
 				<Form.Group className="mb-3">
