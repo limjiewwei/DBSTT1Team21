@@ -2,6 +2,7 @@ flask
 flask-sqlalchemy
 flask-bcrypt
 python-dotenv
+flask-smorest
 flask-session
 redis
 Flask-RESTful==0.3.8
