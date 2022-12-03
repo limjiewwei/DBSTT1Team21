@@ -599,8 +599,8 @@ progress {
   width: 100%;
   top: 8rem;
   scroll-margin-top: 8rem;
-  padding-right:  2rem;
-  padding-left: 2rem;
+ /* padding-right:  2rem;
+  padding-left: 2rem;*/
   margin-right: auto;
   margin-left: auto;
 }
