@@ -80,19 +80,20 @@ def login_user():
             "errors": "that email or password is incorrect"
         }), HTTP_401_UNAUTHORIZED
 
-    if not bcrypt.check_password_hash(user.password, password):
-        return jsonify({
-            "errors": "that email or password is incorrect"
-        }), HTTP_401_UNAUTHORIZED
+    # if not bcrypt.check_password_hash(user.Password, password):
+    #     return jsonify({
+    #         "errors": "that email or password is incorrect"
+    #     }), HTTP_401_UNAUTHORIZED
 
     token = jwt.encode({
-        'public_id': user.user_id,
+        'public_id': user.UserID,
         'exp' : datetime.utcnow() + timedelta(minutes = 30)
     }, os.getenv("SECRET_KEY"))
 
     return jsonify({
-        "user": user.id,
-        "user id": user.user_id,
-        "email": user.email,
+        "user id": user.UserID,
+        "user Name": user.Username,
+        "first name":user.Firstname,
+        "last name": user.Lastname,
         "token": token.decode('UTF-8')
     }), HTTP_200_OK
