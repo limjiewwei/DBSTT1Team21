@@ -2,6 +2,7 @@ import '../App.css';
 import { useEffect, useState, useContext } from 'react'
 import { useNavigate } from'react-router-dom'
 import axios from 'axios'
+import Button from 'react-bootstrap/Button';
 
 const Profilepage = () => {
     const navigate = useNavigate()
@@ -32,7 +33,7 @@ const Profilepage = () => {
 
   return (
     <div>
-    <p onClick={backButton}>Back</p>
+      <Button variant="outline-secondary" onClick={backButton}>Back</Button>
     <form class="profileContainer">
     <h3>Profile Page</h3>
     <div class="form-group">
