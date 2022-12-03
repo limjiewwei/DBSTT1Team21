@@ -23,6 +23,8 @@ render(
         {/* <Route path="login" element={<Login />} /> */}
         <Route path="profilepage" element={<Profilepage />} />
 			</Route>
+
+			<Route path="/newtransaction" element={<NewTransaction/>}/>
 		</Routes>
 	</Router>,
 	document.getElementById("root")
