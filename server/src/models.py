@@ -22,3 +22,22 @@ class User(db.Model):
     Email = db.Column(db.String(255), nullable=False)
     Address = db.Column(db.String(255), nullable=False)
     OptIntoPhyStatements = db.Column(db.Integer, nullable=False)
+
+class Bank_Account(db.Model): 
+    tablename = "Bank_Account" 
+    AccountID = db.Column(db.Integer, primary_key=True) 
+    UserID = db.Column(db.Integer, db.ForeignKey("User.UserID"), nullable=False) 
+    AccountType = db.Column(db.String(255), unique=False, nullable=False) 
+    AccountBalance = db.Column(db.Numeric(precision=10, scale=2), nullable=False) 
+ 
+ 
+class Scheduled_Transaction(db.Model): 
+    tablename = "Scheduled_Transaction" 
+    TransactionID = db.Column(db.Integer, primary_key=True) 
+    AccountID = db.Column( 
+        db.Integer, db.ForeignKey("Bank_Account.AccountID"), nullable=False 
+    ) 
+    ReceivingAccountID = db.Column(db.Integer, unique=False, nullable=False) 
+    Date = db.Column(db.String(255), nullable=False) 
+    TransactionAmount = db.Column(db.Numeric(precision=10, scale=2), nullable=False) 
+    Comment = db.Column(db.String(255), nullable=False)

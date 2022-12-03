@@ -2,6 +2,7 @@ from flask import Flask, request, abort, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS, cross_origin
 from src.authentication import authentication, bcrypt
+from src.transactions import transactions
 from src.models import User, db
 from flask_migrate import Migrate
 from flask_session import Session
@@ -28,6 +29,8 @@ bcrypt.init_app(app)
 
 # use blueprints to group related functionalities together
 app.register_blueprint(authentication)
+app.register_blueprint(transactions)
+
 
 
 
