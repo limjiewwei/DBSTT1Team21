@@ -31,6 +31,7 @@ const Profilepage = () => {
     }
 
   return (
+    <div>
     <p onClick={backButton}>Back</p>
     <form class="profileContainer">
     <h3>Profile Page</h3>
@@ -62,6 +63,7 @@ const Profilepage = () => {
     <button onClick={cancel} type="submit" class="btn btn-primary">Cancel</button>
 
     </form>
+    </div>
   )
 }
 
