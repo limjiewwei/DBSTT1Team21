@@ -12,11 +12,16 @@ def get_uuid():
 # database schema models
 
 class User(db.Model):
-    __tablename__ = "users"
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.String(32), unique=True, default=get_uuid, nullable=False)
-    # we dont provide user with an id, default value will be get_uuid, which will return a new unique id
-    email = db.Column(db.String(345), unique=True)
-    password = db.Column(db.Text, nullable=False)
+    __tablename__ = "User"
+    UserID = db.Column(db.Integer, default=get_uuid, primary_key=True)
+    # userID generated with UUID
+    UserName = db.Column(db.String(20), unique=True, nullable=False)
+    Password = db.Column(db.String(20), unique=False, nullable=False)
+    FirstName = db.Column(db.String(255), unique=False, nullable=False)
+    LastName = db.Column(db.String(255), unique=False, nullable=False)
+    Email = db.Column(db.String(255), unique=False)
+    Address = db.Column(db.String(255), unique=False)
+    OptIntoPhyStatements =db.Column(db.Integer(1), unique=False), nullable=False)
+   
 
 
