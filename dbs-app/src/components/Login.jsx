@@ -4,13 +4,15 @@ import { useNavigate } from "react-router-dom";
 import setAuthToken from "../setAuthToken"
 import Header from './Header';
 const shadstyle= `
-1px 2px 2px hsl(220deg 60% 50% / 0.333),
-2px 4px 4px hsl(220deg 60% 50% / 0.333),
-3px 6px 6px hsl(220deg 60% 50% / 0.333)`
+1px 2px 2px hsl(220deg 30% 50% / 0.333),
+2px 4px 4px hsl(220deg 30% 50% / 0.333),
+3px 6px 6px hsl(220deg 30% 50% / 0.333)`
 const boxshadow={
     "height" : "50vh",
     "width": "50vh",
     "box-shadow": shadstyle,
+    "position": "center",
+    
 
 }
 function Login() {
@@ -56,14 +58,19 @@ function Login() {
       navigate("/");
     }
 }
-    return (<div style={{display: 'flex',  justifyContent:'center', alignItems:'center', width: '100vw' ,height: '100vh', backgroundImage: `url("https://i.ytimg.com/vi/eXpmqDqq7w8/maxresdefault.jpg")`}}>
+    return (<div style={{display: 'flex',  justifyContent:'center', alignItems:'center', width: '100vw' ,height: '100vh', backgroundImage: `url("https://planetofhotels.com/guide/sites/default/files/styles/paragraph__hero_banner__hb_image__1880bp/public/hero_banner/Gardens-by-the-Bay.jpg")`}}>
       <Header/>
-        <main class="form-signin container-fluid">
-          <div className="card card-body" style={boxshadow} >
-        <form>
-          <img class="mb-4" src="./logo.svg" alt="" width="72" height="57"/>
-          <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-      
+        <main className=" form-signin container-fluid">
+          <div className="card card-body mx-auto" style={boxshadow} >
+        <form >
+          <div className="container-fluid mx-auto" style={{justifyContent:'center'}}>
+        <img src="desktoplogo.png" className="img-responsive center-block mx-auto"/>
+        </div>
+        <br/>
+        <br/>
+          <h1 class="h6 mb-3 fw-normal">Sign in to digibank</h1>
+          
+          
           <div class="form-floating">
             <input type="username" class="form-control" id="floatingInput" onChange={handleChange} name="username" placeholder="name@example.com"/>
             <label for="floatingInput">Username</label>
