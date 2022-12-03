@@ -20,7 +20,7 @@ const Profilepage = () => {
     }, [])
 
     const cancel = () => {
-      navigate("/")
+      navigate("/dashboard")
     }
 
     const edit = (id) => {
