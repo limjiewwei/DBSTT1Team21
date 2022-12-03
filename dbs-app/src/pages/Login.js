@@ -34,10 +34,10 @@ function Login() {
 					password: auth.password,
 				})
 				.then((response) => {
-					if (!response.data.accessToken) {
+					if (!response.data.token) {
 						navigate("/login");
 					} else {
-						const token = response.data.accessToken;
+						const token = response.data.token;
 						localStorage.setItem("token", token);
 						setAuthToken(token);
 						navigate("/dashboard");
@@ -62,7 +62,7 @@ function Login() {
 				backgroundImage: `url("https://planetofhotels.com/guide/sites/default/files/styles/paragraph__hero_banner__hb_image__1880bp/public/hero_banner/Gardens-by-the-Bay.jpg")`,
 			}}>
 			<Container Fluid>
-				<Card style={{ width: "100%", height: "100%" }}>
+				<Card className="mx-auto" style={{ width: "50%", height: "100%" }}>
 					<img src={desktoplogo} style={{ width: "200px", height: "150px", marginLeft: "auto", marginRight: "auto" }} />
 					<Card.Body>
 						<Form>
