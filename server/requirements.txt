@@ -1,0 +1,8 @@
+flask
+flask-sqlalchemy
+flask-bcrypt
+python-dotenv
+flask-session
+redis
+Flask-RESTful==0.3.8
+PyJWT==1.7.1
